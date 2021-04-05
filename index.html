@@ -6,6 +6,42 @@
 		// TODO: create a handler
     window.addEventListener("load", function(){
         // TODO: register the handler
+		window.addEventListener("submit",function(){			
+			let searchEngine="";			
+			let sEngine = document.getElementsByName("rSearchEngine");
+			for (i=0; i< sEngine.length; i++)
+			{
+				if(sEngine[i].checked)
+				{
+					searchEngine =  sEngine[i].value;
+				}
+			}			
+			
+			if (searchEngine !== "" && document.getElementsByName("q")[0].value !== "")
+			{
+				
+				if( searchEngine === "Google" ) {
+					document.getElementById("searchForm").action = "https://www.google.com/search";
+					}
+					else if( searchEngine === "DuckDuckGo" ) {
+						document.getElementById("searchForm").action = "https://duckduckgo.com/";
+					}
+					else if( searchEngine === "Bing" ) {
+						document.getElementById("searchForm").action = "https://www.bing.com/search";
+					}
+					else
+					{
+						document.getElementById("searchForm").action = "https://www.ask.com/web";
+					}
+			}
+			else
+			{
+				alert("Please select the search engine and provide the text");
+				event.preventDefault();
+				return false;
+			}
+			
+		})
     });
 	</script>
 </head>
@@ -14,6 +50,12 @@
 
 	<form id="searchForm">
     <!-- TODO: add form elements -->
+	<input type="text" name="q">
+	<label><input type="radio"  name="rSearchEngine" value="Google">Google</label>
+	<label><input type="radio"  name="rSearchEngine" value="DuckDuckGo">DuckDuckGo</label>
+	<label><input type="radio"  name="rSearchEngine" value="Bing">Bing</label>
+	<label><input type="radio"  name="rSearchEngine" value="Ask">ASk</label>
+	<input type="submit" name="btnGo" value="Go!">
 	</form>
 
 </body>
